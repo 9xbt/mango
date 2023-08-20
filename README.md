@@ -1,5 +1,5 @@
 # The mango Operating System
-A powerful unix-like OS that uses [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal) as the terminal.
+A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS that uses [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal) as the terminal.
 
 ## Current features:
 - Unix-like commands
