@@ -1,2 +1,11 @@
 # The mango Operating System
-A powerful unix-like OS that uses [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal) as the console.
+A powerful unix-like OS that uses [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal) as the terminal.
+
+## Current features:
+- Unix-like commands
+- Switching usernames
+- Switching keymaps
+- FAT32 support & disk commands
+
+## Screenshots
+![image](https://github.com/9xbt/mango/assets/109512837/e3570e73-d0a3-48c5-a793-5ebdf7ca1b92)
