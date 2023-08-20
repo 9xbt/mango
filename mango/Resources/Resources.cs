@@ -11,5 +11,8 @@ namespace mango
 
         [ManifestResourceStream(ResourceName = "mango.Resources.mango.bmp")] private static byte[] rawLogo;
         public static Canvas Logo = Image.FromBitmap(rawLogo, false);
+
+        [ManifestResourceStream(ResourceName = "mango.Resources.Mouse.bmp")] private static byte[] rawMouse;
+        public static Canvas Mouse = Image.FromBitmap(rawMouse, false);
     }
 }

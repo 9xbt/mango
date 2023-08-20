@@ -107,6 +107,10 @@ public class SVGAIITerminal
 
                 return new ConsoleKeyInfo(key.KeyChar, key.Key.ToConsoleKey(), xShift, xAlt, xControl);
             }
+            else
+            {
+                Update?.Invoke();
+            }
         }
     }
 
@@ -198,6 +202,8 @@ public class SVGAIITerminal
                         break;
                 }
             }
+
+            Update?.Invoke();
         }
 
         return returnValue;

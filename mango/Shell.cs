@@ -18,6 +18,9 @@ namespace mango
             
             switch (args[0].Trim().ToLower())
             {
+                case "":
+                    break;
+
                 case "?":
                     Commands.Help();
                     break;

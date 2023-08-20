@@ -29,6 +29,7 @@
     <ItemGroup>
       <None Remove="Resources\Font.btf" />
       <None Remove="Resources\mango.bmp" />
+      <None Remove="Resources\Mouse.bmp" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +38,7 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\Font.btf" />
+      <EmbeddedResource Include="Resources\Mouse.bmp" />
     </ItemGroup>
 
     <ItemGroup>

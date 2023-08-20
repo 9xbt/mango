@@ -21,6 +21,7 @@ namespace mango
         {
             try
             {
+                MouseDriver.Initialize();
                 DiskManager.InitFS(FS);
                 DiskManager.LoadSettings();
 
@@ -47,11 +48,19 @@ namespace mango
             }
         }
 
+        private static int framesToHeapCollect = 10;
+
         public static void TerminalUpdate()
         {
             Screen.DrawImage(0, 0, Console.Contents, false);
+            MouseDriver.Update();
             Screen.Update();
-            Heap.Collect();
+
+            if (framesToHeapCollect <= 0)
+            {
+                Heap.Collect();
+                framesToHeapCollect = 10;
+            }
         }
     }
 }
