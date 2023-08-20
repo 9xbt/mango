@@ -1,29 +1,24 @@
 ﻿using System;
 using System.IO;
 
-namespace LemonOS
+namespace mango
 {
     public static partial class Commands
     {
-        public static void SU(string input, string[] args)
+        public static void SU(string[] args)
         {
-            if (!input.Contains('"') && args.Length < 2)
+            if (args.Length < 2)
             {
                 Console.WriteLine("Argument underflow.", SVGAIIColor.Red);
                 return;
             }
-            else if (!input.Contains('"') && args.Length > 2)
+            else if (args.Length > 2)
             {
                 Console.WriteLine("Argument overflow.", SVGAIIColor.Red);
                 return;
             }
 
-            string userTo = string.Empty;
-
-            if (input.Contains("\""))
-                userTo = input.Substring(4, input.Length - 5).Trim();
-            else
-                userTo = args[1].Trim();
+            string userTo = userTo = args[1].Trim();
 
             try
             {

@@ -72,7 +72,19 @@ public class SVGAIITerminal
 
     public void WriteLine(object str, Color color) => Write(str + "\n", color);
 
-    public ConsoleKeyInfo ReadKey(bool intercept = true)
+    public void DrawImage(Canvas image, bool alpha = false)
+    {
+        if (image == null)
+        {
+            throw new ArgumentNullException(nameof(image));
+        }
+
+        Contents.DrawImage(Font.Size / 2 * CursorX, Font.Size * CursorY, image, alpha);
+
+        CursorY += image.Height / Font.Size;
+    }
+
+    public ConsoleKeyInfo ReadKey(bool intercept = false)
     {
         while (true)
         {

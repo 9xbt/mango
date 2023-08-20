@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-namespace LemonOS
+namespace mango
 {
     public static partial class Commands
     {
-        public static void RM(string input, string[] args)
+        public static void Touch(string input, string[] args)
         {
             if (!input.Contains('"') && args.Length < 2)
             {
@@ -18,6 +18,8 @@ namespace LemonOS
                 return;
             }
 
+            args[1] = args[1].Replace("/", "\\");
+
             string fileTo = string.Empty;
 
             if (input.Contains("\""))
@@ -27,11 +29,11 @@ namespace LemonOS
 
             try
             {
-                File.Delete(fileTo);
+                File.Create(fileTo);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"rm: Failed to delete file \"{fileTo}\": {ex.Message}", SVGAIIColor.Red);
+                Console.WriteLine($"touch: Failed to create file \"{fileTo}\": {ex.Message}", SVGAIIColor.Red);
                 return;
             }
         }

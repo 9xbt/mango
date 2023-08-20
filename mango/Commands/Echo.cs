@@ -2,7 +2,7 @@
 using System.Text;
 using System.IO;
 
-namespace LemonOS
+namespace mango
 {
     public static partial class Commands
     {
@@ -28,6 +28,8 @@ namespace LemonOS
             }
             else if (args.Length == 2)
             {
+                args[1] = args[1].Replace("/", "\\");
+
                 try
                 {
                     File.Create(@$"{Directory.GetCurrentDirectory()}\{args[1]}");

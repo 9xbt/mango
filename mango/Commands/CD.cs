@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace LemonOS
+namespace mango
 {
     public static partial class Commands
     {
@@ -16,6 +16,8 @@ namespace LemonOS
                 Console.WriteLine("Argument overflow.", SVGAIIColor.Red);
                 return;
             }
+
+            args[1] = args[1].Replace("/", "\\");
 
             string cdTo = string.Empty;
 

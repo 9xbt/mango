@@ -1,4 +1,4 @@
-﻿namespace LemonOS
+﻿namespace mango
 {
     public static class Logger
     {

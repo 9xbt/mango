@@ -22,12 +22,17 @@
         <OptimizationLevel>2</OptimizationLevel>
         <Copyright>Copyright (c) 2023 Mobren</Copyright>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/9xbt/LemonOS</RepositoryUrl>
+        <RepositoryUrl>https://github.com/9xbt/mango</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="Resources\Font.btf" />
+      <None Remove="Resources\mango.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\mango.bmp" />
     </ItemGroup>
 
     <ItemGroup>

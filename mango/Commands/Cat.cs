@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LemonOS
+namespace mango
 {
     public static partial class Commands
     {
@@ -21,6 +17,8 @@ namespace LemonOS
                 Console.WriteLine("Argument overflow.", SVGAIIColor.Red);
                 return;
             }
+
+            args[1] = args[1].Replace("/", "\\");
 
             string catTo = string.Empty;
 

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace LemonOS
+namespace mango
 {
     public static class Shell
     {
@@ -8,15 +8,20 @@ namespace LemonOS
 
         public static void Run()
         {
-            Console.Write($"{Kernel.Username} ", SVGAIIColor.Green);
-            Console.Write($"({Directory.GetCurrentDirectory()}) ", SVGAIIColor.Blue);
-            Console.Write("$ ", SVGAIIColor.White);
+            Console.Write(Kernel.Username, SVGAIIColor.Green);
+            Console.Write(":");
+            Console.Write(DiskManager.GetUnixLikePath(Directory.GetCurrentDirectory()), SVGAIIColor.Blue);
+            Console.Write(" $ ");
 
             string input = Console.ReadLine().Trim();
             string[] args = input.Split(' ');
             
-            switch (args[0].Trim())
+            switch (args[0].Trim().ToLower())
             {
+                case "?":
+                    Commands.Help();
+                    break;
+
                 case "help":
                     Commands.Help();
                     break;
@@ -29,8 +34,12 @@ namespace LemonOS
                     Commands.Clear();
                     break;
 
+                case "loadkeys":
+                    Commands.LoadKeys(args);
+                    break;
+
                 case "su":
-                    Commands.SU(input, args);
+                    Commands.SU(args);
                     break;
 
                 case "ls":
