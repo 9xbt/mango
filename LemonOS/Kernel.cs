@@ -13,8 +13,8 @@ namespace LemonOS
         [ManifestResourceStream(ResourceName = "LemonOS.Resources.Font.btf")] private static byte[] rawFont;
         public static Font Font = new Font(rawFont, 16);
 
-        public static Display Screen = Display.GetDisplay(800, 600);
-        public static SVGAIITerminal Console = new SVGAIITerminal(800, 600, Font, Update);
+        public static Display Screen = Display.GetDisplay(1920, 1080);
+        public static SVGAIITerminal Console = new SVGAIITerminal(1920, 1080, Font, Update);
         public static CosmosVFS FS = new CosmosVFS();
 
         public const string Version = "Version 1.0";
@@ -42,7 +42,7 @@ namespace LemonOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception in runtime: {ex.Message}", SVGAIIColor.Red);
+                Console.WriteLine($"Unhandled exception in runtime: {ex.Message}", SVGAIIColor.Red);
             }
         }
 
