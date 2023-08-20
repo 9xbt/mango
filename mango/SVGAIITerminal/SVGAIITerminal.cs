@@ -79,9 +79,13 @@ public class SVGAIITerminal
             throw new ArgumentNullException(nameof(image));
         }
 
-        Contents.DrawImage(Font.Size / 2 * CursorX, Font.Size * CursorY, image, alpha);
-
         CursorY += image.Height / Font.Size;
+
+        TryScroll();
+
+        Contents.DrawImage(Font.Size / 2 * CursorX, Font.Size * CursorY - (image.Height), image, alpha);
+
+        Update?.Invoke();
     }
 
     public ConsoleKeyInfo ReadKey(bool intercept = false)
