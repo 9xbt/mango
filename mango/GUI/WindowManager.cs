@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define SHOW_FPS
+
+using System;
 using System.Collections.Generic;
 using Cosmos.Core.Memory;
 using Cosmos.System;
@@ -13,7 +15,6 @@ namespace mango.GUI
 
         public static Display Screen = Kernel.Screen;
         public static List<Window> Windows = new List<Window>(10);
-        public static Action<Window> DesktopWindowHook;
 
         public static Window FocusedWindow
         {
@@ -28,21 +29,11 @@ namespace mango.GUI
             }
         }
 
+        public static Window LastFocusedWindow = null;
+
         public static void AddWindow(Window wnd)
         {
-            if (!Windows.Contains(wnd))
-            {
-                int amountOfThese = GetAmountOfWindowsByName(wnd.Name);
-
-                if (amountOfThese > 0)
-                {
-                    wnd.Name += $" <{amountOfThese}>";
-                }
-
-                Windows.Add(wnd);
-
-                DesktopWindowHook?.Invoke(wnd);
-            }
+            Windows.Add(wnd);
         }
 
         public static void MoveWindowToFront(Window wnd)
@@ -51,7 +42,6 @@ namespace mango.GUI
             {
                 Windows.Remove(wnd);
                 Windows.Add(wnd);
-                DesktopWindowHook?.Invoke(wnd);
             }
         }
 
@@ -106,7 +96,9 @@ namespace mango.GUI
 
             MouseDriver.Update();
 
+            #if SHOW_FPS
             Screen.DrawString(2, 22, $"{Screen.GetFPS()} FPS", Resources.Font, PrismAPI.Graphics.Color.Black);
+            #endif
 
             Screen.Update();
 
@@ -117,6 +109,8 @@ namespace mango.GUI
                 Heap.Collect();
                 framesToHeapCollect = 10;
             }
+
+            LastFocusedWindow = FocusedWindow;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace mango
                 return;
             }
 
-            string userTo = userTo = args[1].Trim();
+            string userTo = args[1].Trim();
 
             try
             {

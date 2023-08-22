@@ -10,7 +10,8 @@ namespace mango.GUI.Apps
 
         public Desktop() : base(0, 0, WindowManager.Screen.Width, WindowManager.Screen.Height, "WM.Desktop")
         {
-            WindowManager.DesktopWindowHook = WindowHook;
+            Movable = false;
+            Resizable = false;
         }
 
         public override void Render()
@@ -19,32 +20,19 @@ namespace mango.GUI.Apps
 
             Contents.DrawFilledRectangle(0, 0, Contents.Width, 20, 0, Color.LightBlack);
             Contents.DrawString(2, 2, "1", Resources.Font, Color.White);
+            if (WindowManager.FocusedWindow != null)
+                if (!WindowManager.FocusedWindow.Name.StartsWith("WM."))
+                    Contents.DrawString(18, 2, WindowManager.FocusedWindow.Name, Resources.Font, BorderColor2);
             Contents.DrawString(Contents.Width - Resources.Font.MeasureString(timeString) - 2, 2, timeString, Resources.Font, BorderColor2);
             Contents.DrawImage(0, 20, Resources.Background, false);
         }
 
         public override void Update()
         {
-            if (RTC.Minute != lastMinute)
+            if (RTC.Minute != lastMinute || WindowManager.FocusedWindow.Name != WindowManager.LastFocusedWindow.Name)
             {
                 Render();
                 lastMinute = RTC.Minute;
-            }
-        }
-
-        private void WindowHook(Window window)
-        {
-            Render();
-
-            try
-            {
-                if (window != null)
-                    if (!window.Name.StartsWith("WM."))
-                        Contents.DrawString(18, 2, WindowManager.FocusedWindow.Name, Resources.Font, BorderColor2);
-            }
-            catch (Exception ex)
-            {
-                Contents.DrawString(18, 2, ex.ToString(), Resources.Font, BorderColor2);
             }
         }
     }
