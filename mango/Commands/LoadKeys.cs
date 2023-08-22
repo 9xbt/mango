@@ -42,7 +42,7 @@ namespace mango
                 try
                 {
                     KeyboardManager.SetKeyLayout(map);
-                    File.WriteAllText(@"0:\LunarOS\keymap.txt", keymapTo);
+                    File.WriteAllText(@"0:\mango\keymap.txt", keymapTo);
                 }
                 catch (Exception ex)
                 {

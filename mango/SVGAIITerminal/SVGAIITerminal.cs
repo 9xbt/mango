@@ -109,12 +109,14 @@ public class SVGAIITerminal
             }
             else
             {
-                Update?.Invoke();
+                mango.GUI.WindowManager.Update();
             }
         }
     }
 
     public string LastInput;
+
+    public bool reading = false;
 
     public string ReadLine()
     {
@@ -123,7 +125,7 @@ public class SVGAIITerminal
         int startX = CursorX, startY = CursorY;
         string returnValue = string.Empty;
 
-        bool reading = true;
+        reading = true;
         while (reading)
         {
             TryDrawCursor();
@@ -203,9 +205,10 @@ public class SVGAIITerminal
                 }
             }
 
-            Update?.Invoke();
+            mango.GUI.WindowManager.Update();
         }
 
+        reading = false;
         return returnValue;
     }
 
@@ -225,18 +228,7 @@ public class SVGAIITerminal
         PCSpeaker.Beep(freq, duration);
     }
 
-    #endregion
-
-    #region Private fields
-
-    private byte lastSecond = Cosmos.HAL.RTC.Second;
-    private bool cursorState = true;
-
-    #endregion
-
-    #region Private functions
-
-    private void TryScroll()
+    public void TryScroll()
     {
         if (CursorX >= Width)
         {
@@ -253,13 +245,13 @@ public class SVGAIITerminal
         }
     }
 
-    private void ForceDrawCursor()
+    public void ForceDrawCursor()
     {
         Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, ForegroundColor);
         Update?.Invoke();
     }
 
-    private void TryDrawCursor()
+    public void TryDrawCursor()
     {
         if (Cosmos.HAL.RTC.Second != lastSecond)
         {
@@ -270,6 +262,13 @@ public class SVGAIITerminal
             cursorState = !cursorState;
         }
     }
+
+    #endregion
+
+    #region Private fields
+
+    private byte lastSecond = Cosmos.HAL.RTC.Second;
+    private bool cursorState = true;
 
     #endregion
 }

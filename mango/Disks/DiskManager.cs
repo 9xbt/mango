@@ -27,7 +27,7 @@ namespace mango
         {
             try
             {
-                Kernel.Username = File.ReadAllText(@"0:\LunarOS\username.txt");
+                Kernel.Username = File.ReadAllText(@"0:\mango\username.txt");
                 Logger.SuccessLog("Username loaded.");
                 Logger.InfoLog($"Switched username to {Kernel.Username}.");
             }
@@ -39,7 +39,7 @@ namespace mango
 
             try
             {
-                string keymapTo = File.ReadAllText(@"0:\LunarOS\keymap.txt");
+                string keymapTo = File.ReadAllText(@"0:\mango\keymap.txt");
                 Commands.LoadKeys(new string[] { "loadkeys", keymapTo });
                 Logger.SuccessLog("Keymap set.");
                 Logger.InfoLog($"Set keymap to {keymapTo}.");

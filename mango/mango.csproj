@@ -24,15 +24,18 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/9xbt/mango</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <CompressionType>Gzip</CompressionType>
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\Background.bmp" />
       <None Remove="Resources\Font.btf" />
       <None Remove="Resources\mango.bmp" />
       <None Remove="Resources\Mouse.bmp" />
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Resources\Background.bmp" />
       <EmbeddedResource Include="Resources\mango.bmp" />
     </ItemGroup>
 

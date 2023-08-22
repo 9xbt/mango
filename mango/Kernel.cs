@@ -1,8 +1,9 @@
 ﻿using System;
 using Sys = Cosmos.System;
 using Cosmos.System.FileSystem;
-using Cosmos.Core.Memory;
 using PrismAPI.Hardware.GPU;
+using mango.GUI;
+using mango.GUI.Apps;
 
 namespace mango
 {
@@ -12,7 +13,7 @@ namespace mango
         public static SVGAIITerminal Console = new SVGAIITerminal(1280, 720, Resources.Font, TerminalUpdate);
         public static CosmosVFS FS = new CosmosVFS();
 
-        public const string Version = "Version 1.0";
+        public const string Version = "Version 1.1";
         public const string Copyright = "\nCopyright (c) 2023 Mobren\n";
 
         public static string Username;
@@ -21,14 +22,20 @@ namespace mango
         {
             try
             {
+                Resources.Initialize();
                 MouseDriver.Initialize();
                 DiskManager.InitFS(FS);
                 DiskManager.LoadSettings();
+                Logger.InfoLog("Starting desktop enviorment...");
 
-                Console.Clear();
-                Console.WriteLine($"Welcome back, {Username}.\n");
-                Console.DrawImage(Resources.Logo, false);
-                Console.WriteLine($"\nThe mango Operating System\n{Version}{Copyright}");
+                var term = new Terminal();
+                term.Console.WriteLine($"Welcome back, {Username}.\n");
+                term.Console.DrawImage(Resources.Logo, false);
+                term.Console.WriteLine($"\nThe mango Operating System\n{Version}{Copyright}");
+                term.DrawPrompt();
+
+                WindowManager.AddWindow(new Desktop());
+                WindowManager.AddWindow(term);
             }
             catch (Exception ex)
             {
@@ -40,7 +47,7 @@ namespace mango
         {
             try
             {
-                Shell.Run();
+                WindowManager.Update();
             }
             catch (Exception ex)
             {
@@ -48,19 +55,10 @@ namespace mango
             }
         }
 
-        private static int framesToHeapCollect = 10;
-
-        public static void TerminalUpdate()
+        private static void TerminalUpdate()
         {
             Screen.DrawImage(0, 0, Console.Contents, false);
-            MouseDriver.Update();
             Screen.Update();
-
-            if (framesToHeapCollect <= 0)
-            {
-                Heap.Collect();
-                framesToHeapCollect = 10;
-            }
         }
     }
 }

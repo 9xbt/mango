@@ -1,21 +1,14 @@
-﻿using System.IO;
-
-namespace mango
+﻿namespace mango
 {
     public static class Shell
     {
-        private static SVGAIITerminal Console = Kernel.Console;
-
-        public static void Run()
+        public static void Run(string input, SVGAIITerminal Console)
         {
-            Console.Write(Kernel.Username, SVGAIIColor.Green);
-            Console.Write(":");
-            Console.Write(DiskManager.GetUnixLikePath(Directory.GetCurrentDirectory()), SVGAIIColor.Blue);
-            Console.Write(" $ ");
+            Commands.Console = Console;
 
-            string input = Console.ReadLine().Trim();
+            input = input.Trim();
             string[] args = input.Split(' ');
-            
+
             switch (args[0].Trim().ToLower())
             {
                 case "":

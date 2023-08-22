@@ -22,8 +22,8 @@ namespace mango
 
             try
             {
-                Directory.CreateDirectory(@"0:\LunarOS");
-                File.WriteAllText(@"0:\LunarOS\username.txt", userTo);
+                Directory.CreateDirectory(@"0:\mango");
+                File.WriteAllText(@"0:\mango\username.txt", userTo);
             }
             catch (Exception ex)
             {

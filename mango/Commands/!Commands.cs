@@ -2,6 +2,6 @@
 {
     public static partial class Commands
     {
-        private static SVGAIITerminal Console = Kernel.Console;
+        public static SVGAIITerminal Console = Kernel.Console;
     }
 }
