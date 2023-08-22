@@ -68,6 +68,7 @@ namespace mango.GUI.Apps
                             Console.LastInput = returnValue;
 
                             Shell.Run(returnValue, Console);
+                            Console.Font = Resources.Font;
                             DrawPrompt();
 
                             startX = Console.CursorX;

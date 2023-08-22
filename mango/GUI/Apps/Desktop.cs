@@ -11,7 +11,6 @@ namespace mango.GUI.Apps
         public Desktop() : base(0, 0, WindowManager.Screen.Width, WindowManager.Screen.Height, "WM.Desktop")
         {
             Movable = false;
-            Resizable = false;
         }
 
         public override void Render()

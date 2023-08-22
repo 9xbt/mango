@@ -6,17 +6,19 @@ namespace mango.GUI
 {
     public class Window
     {
-        private long dsx, dsy;
-        private uint dsmx, dsmy;
-        private bool d = false;
+        // Drag code from GoOS
+        // https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs
+
+        private int dragStartX, dragStartY, dragStartMouseX, dragStartMouseY;
+        private bool dragging = false;
 
         protected static Color BorderColor1 = new Color(150, 150, 150);
         protected static Color BorderColor2 = new Color(200, 200, 200);
 
-        public long X, Y;
+        public int X, Y;
         public ushort Width, Height;
         public string Name;
-        public bool Movable = true, Resizable = true;
+        public bool Movable = true;
 
         public bool Focused
         {
@@ -32,20 +34,6 @@ namespace mango.GUI
             {
                 return MouseManager.X > X && MouseManager.X < X + Width && MouseManager.Y > Y && MouseManager.Y < Y + Height;
             }
-        }
-
-        public int GetMouseCorner()
-        {
-            if (MouseManager.X > X - 5 && MouseManager.X < X && MouseManager.Y > Y - 5 && MouseManager.Y < Y)
-                return 0;
-            else if (MouseManager.X > X + Width && MouseManager.X < X + Width + 5 && MouseManager.Y > Y - 5 && MouseManager.Y < Y)
-                return 1;
-            else if (MouseManager.X > X - 5 && MouseManager.X < X && MouseManager.Y > Y + Height && MouseManager.Y < Y + Height + 5)
-                return 2;
-            else if (MouseManager.X > X + Width && MouseManager.X < X + Width + 5 && MouseManager.Y > Y + Height && MouseManager.Y < Y + Height + 5)
-                return 3;
-            else
-                return -1;
         }
 
         public Canvas Contents;
@@ -81,27 +69,22 @@ namespace mango.GUI
 
             if (Movable && IsMouseOver && Focused && MouseManager.LastMouseState == MouseState.None && MouseManager.MouseState == MouseState.Left)
             {
-                dsx = X;
-                dsy = Y;
-                dsmx = MouseManager.X;
-                dsmy = MouseManager.Y;
-                d = true;
+                dragStartX = X;
+                dragStartY = Y;
+                dragStartMouseX = (int)MouseManager.X;
+                dragStartMouseY = (int)MouseManager.Y;
+                dragging = true;
             }
 
-            if (GetMouseCorner() > -1)
+            if (dragging)
             {
-
-            }
-
-            if (d)
-            {
-                X = dsx + (MouseManager.X - dsmx);
-                Y = dsy + (MouseManager.Y - dsmy);
+                X = (int)(dragStartX + (MouseManager.X - dragStartMouseX));
+                Y = (int)(dragStartY + (MouseManager.Y - dragStartMouseY));
             }
 
             if (MouseManager.MouseState == MouseState.None)
             {
-                d = false;
+                dragging = false;
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿//#define SHOW_FPS
 
-using System;
 using System.Collections.Generic;
 using Cosmos.Core.Memory;
 using Cosmos.System;
@@ -15,6 +14,8 @@ namespace mango.GUI
 
         public static Display Screen = Kernel.Screen;
         public static List<Window> Windows = new List<Window>(10);
+
+        public static string Version = "Version 1.0";
 
         public static Window FocusedWindow
         {
@@ -34,6 +35,11 @@ namespace mango.GUI
         public static void AddWindow(Window wnd)
         {
             Windows.Add(wnd);
+        }
+
+        public static void RemoveWindow(Window wnd)
+        {
+            Windows.Remove(wnd);
         }
 
         public static void MoveWindowToFront(Window wnd)
@@ -72,26 +78,23 @@ namespace mango.GUI
 
             if (KeyboardManager.TryReadKey(out var key))
             {
-                if (KeyboardManager.AltPressed)
+                if (KeyboardManager.AltPressed && key.Key == ConsoleKeyEx.T)
                 {
-                    switch (key.Key)
-                    {
-                        case ConsoleKeyEx.T:
-                            var term = new Terminal();
-                            term.DrawPrompt();
+                    var term = new Terminal();
+                    term.DrawPrompt();
 
-                            AddWindow(term);
-                            break;
-
-                        case ConsoleKeyEx.F4:
-                            Windows.Remove(FocusedWindow);
-                            break;
-                    }
+                    AddWindow(term);
                 }
-                else
+                else if (KeyboardManager.AltPressed && key.Key == ConsoleKeyEx.F4 && !FocusedWindow.Name.StartsWith("WM."))
                 {
-                    Windows[^1].HandleKey(key);
+                    RemoveWindow(FocusedWindow);
                 }
+                else if (key.Key == ConsoleKeyEx.F1 && GetAmountOfWindowsByName("About mwm") < 1)
+                {
+                    AddWindow(new AboutBox());
+                }
+
+                Windows[^1].HandleKey(key);
             }
 
             MouseDriver.Update();
@@ -107,6 +110,7 @@ namespace mango.GUI
             if (framesToHeapCollect <= 0)
             {
                 Heap.Collect();
+                Resources.GenerateFont();
                 framesToHeapCollect = 10;
             }
 

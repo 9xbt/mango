@@ -32,6 +32,8 @@
       <None Remove="Resources\Font.btf" />
       <None Remove="Resources\mango.bmp" />
       <None Remove="Resources\Mouse.bmp" />
+      <None Remove="Resources\resize-se-nw.bmp" />
+      <None Remove="Resources\resize-sw-ne.bmp" />
     </ItemGroup>
 
     <ItemGroup>
@@ -42,6 +44,8 @@
     <ItemGroup>
       <EmbeddedResource Include="Resources\Font.btf" />
       <EmbeddedResource Include="Resources\Mouse.bmp" />
+      <EmbeddedResource Include="Resources\resize-se-nw.bmp" />
+      <EmbeddedResource Include="Resources\resize-sw-ne.bmp" />
     </ItemGroup>
 
     <ItemGroup>
