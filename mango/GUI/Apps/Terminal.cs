@@ -5,12 +5,19 @@ using Cosmos.System;
 
 namespace mango.GUI.Apps
 {
+    public enum TerminalAction
+    {
+        Shell,
+        ReadLine
+    }
+
     public class Terminal : Window
     {
-        public SVGAIITerminal Console;
         private Queue<KeyEvent> KeyBuffer = new Queue<KeyEvent>();
 
-        public bool ReadLineHandleRequest = false;
+        public SVGAIITerminal Console;
+        public TerminalAction Action;
+        public Action<TerminalAction> OnAction;
 
         public Terminal() : base(50, 50, 720, 400, "Terminal")
         {
@@ -45,7 +52,7 @@ namespace mango.GUI.Apps
             Console.Write(" $ ");
         }
 
-        private int startX, startY;
+        public int startX, startY;
         public string returnValue;
 
         public override void Update()
@@ -77,24 +84,28 @@ namespace mango.GUI.Apps
                             break;
 
                         case ConsoleKeyEx.Backspace:
-                            if (!(Console.CursorX == startX && Console.CursorY == startY))
+                            try
                             {
-                                if (Console.CursorX == 0)
+                                if (!(Console.CursorX == startX && Console.CursorY == startY))
                                 {
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
-                                    Console.CursorY--;
-                                    Console.CursorX = Contents.Width / (Console.Font.Size / 2) - 1;
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
-                                }
-                                else
-                                {
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
-                                    Console.CursorX--;
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
-                                }
+                                    if (Console.CursorX == 0)
+                                    {
+                                        Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                        Console.CursorY--;
+                                        Console.CursorX = Contents.Width / (Console.Font.Size / 2) - 1;
+                                        Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    }
+                                    else
+                                    {
+                                        Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                        Console.CursorX--;
+                                        Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    }
 
-                                returnValue = returnValue.Remove(returnValue.Length - 1); // Remove the last character of the string
+                                    returnValue = returnValue.Remove(returnValue.Length - 1); // Remove the last character of the string
+                                }
                             }
+                            catch { }
 
                             Console.ForceDrawCursor();
                             break;

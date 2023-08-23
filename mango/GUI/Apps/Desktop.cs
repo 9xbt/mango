@@ -15,24 +15,30 @@ namespace mango.GUI.Apps
 
         public override void Render()
         {
-            string timeString = DateTime.Now.ToString("t");
+            try
+            {
+                string timeString = DateTime.Now.ToString("t");
 
-            Contents.DrawFilledRectangle(0, 0, Contents.Width, 20, 0, Color.LightBlack);
-            Contents.DrawString(2, 2, "1", Resources.Font, Color.White);
-            if (WindowManager.FocusedWindow != null)
+                Contents.DrawFilledRectangle(0, 0, Contents.Width, 20, 0, Color.LightBlack);
+                Contents.DrawString(2, 2, "1", Resources.Font, Color.White);
+                Contents.DrawString(Contents.Width - Resources.Font.MeasureString(timeString) - 2, 2, timeString, Resources.Font, BorderColor2);
+                Contents.DrawImage(0, 20, Resources.Background, false);
+
+                lastMinute = RTC.Minute;
+
                 if (!WindowManager.FocusedWindow.Name.StartsWith("WM."))
                     Contents.DrawString(18, 2, WindowManager.FocusedWindow.Name, Resources.Font, BorderColor2);
-            Contents.DrawString(Contents.Width - Resources.Font.MeasureString(timeString) - 2, 2, timeString, Resources.Font, BorderColor2);
-            Contents.DrawImage(0, 20, Resources.Background, false);
+            }
+            catch { }
         }
 
         public override void Update()
         {
-            if (RTC.Minute != lastMinute || WindowManager.FocusedWindow.Name != WindowManager.LastFocusedWindow.Name)
-            {
+            if (RTC.Minute != lastMinute)
                 Render();
-                lastMinute = RTC.Minute;
-            }
+
+            if (WindowManager.FocusedWindow != WindowManager.LastFocusedWindow)
+                Render();
         }
     }
 }

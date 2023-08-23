@@ -6,8 +6,8 @@ namespace mango.GUI
 {
     public class Window
     {
-        // Drag code from GoOS
-        // https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs
+        // As a former GoOS developer, there's some similarities in mango from GoOS.
+        // See https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs for the original window drag code.
 
         private int dragStartX, dragStartY, dragStartMouseX, dragStartMouseY;
         private bool dragging = false;
@@ -17,7 +17,7 @@ namespace mango.GUI
 
         public int X, Y;
         public ushort Width, Height;
-        public string Name;
+        public string Name = "Unnamed window";
         public bool Movable = true;
 
         public bool Focused

@@ -34,6 +34,10 @@ namespace mango
                 term.Console.WriteLine($"\nThe mango Operating System\n{Version}{Copyright}");
                 term.DrawPrompt();
 
+                term.startX = term.Console.CursorX;
+                term.startY = term.Console.CursorY;
+                term.Action = TerminalAction.Shell;
+
                 WindowManager.AddWindow(new Desktop());
                 WindowManager.AddWindow(term);
             }
@@ -51,7 +55,7 @@ namespace mango
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unhandled exception in runtime: {ex.Message}", SVGAIIColor.Red);
+                Logger.ErrorLog($"Unhandled exception in runtime: {ex.Message}");
             }
         }
 

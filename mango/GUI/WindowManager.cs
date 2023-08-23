@@ -15,18 +15,15 @@ namespace mango.GUI
         public static Display Screen = Kernel.Screen;
         public static List<Window> Windows = new List<Window>(10);
 
-        public static string Version = "Version 1.0";
-
         public static Window FocusedWindow
         {
             get
             {
-                if (Windows.Count < 1)
-                {
-                    return null;
-                }
+                for (int i = Windows.Count - 1; i >= 0; i--)
+                    if (Windows[i] != null)
+                        return Windows[i];
 
-                return Windows[^1];
+                return null;
             }
         }
 
@@ -37,17 +34,14 @@ namespace mango.GUI
             Windows.Add(wnd);
         }
 
-        public static void RemoveWindow(Window wnd)
-        {
-            Windows.Remove(wnd);
-        }
+        public static void RemoveWindow(Window wnd) => Windows.Remove(wnd);
 
         public static void MoveWindowToFront(Window wnd)
         {
             if (!wnd.Name.StartsWith("WM.") && Windows[^1] != wnd)
             {
-                Windows.Remove(wnd);
-                Windows.Add(wnd);
+                RemoveWindow(wnd);
+                AddWindow(wnd);
             }
         }
 
@@ -83,18 +77,20 @@ namespace mango.GUI
                     var term = new Terminal();
                     term.DrawPrompt();
 
+                    term.startX = term.Console.CursorX;
+                    term.startY = term.Console.CursorY;
+                    term.Action = TerminalAction.Shell;
+
                     AddWindow(term);
                 }
                 else if (KeyboardManager.AltPressed && key.Key == ConsoleKeyEx.F4 && !FocusedWindow.Name.StartsWith("WM."))
                 {
                     RemoveWindow(FocusedWindow);
                 }
-                else if (key.Key == ConsoleKeyEx.F1 && GetAmountOfWindowsByName("About mwm") < 1)
+                else
                 {
-                    AddWindow(new AboutBox());
+                    Windows[^1].HandleKey(key);
                 }
-
-                Windows[^1].HandleKey(key);
             }
 
             MouseDriver.Update();

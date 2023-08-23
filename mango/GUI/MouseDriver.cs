@@ -8,8 +8,6 @@ namespace mango.GUI
         {
             MouseManager.ScreenWidth = WindowManager.Screen.Width;
             MouseManager.ScreenHeight = WindowManager.Screen.Height;
-            MouseManager.X = 0;
-            MouseManager.Y = 0;
             Logger.SuccessLog("Mouse driver initialized.");
         }
 

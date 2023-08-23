@@ -15,7 +15,7 @@
         <CosmosDebugPort>Serial: COM1</CosmosDebugPort>
         <Launch>VMware</Launch>
         <Profile>VMware</Profile>
-        <Description>A terminal based Cosmos OS</Description>
+        <Description>A powerful unix-like Cosmos OS</Description>
         <PxeInterface>192.168.0.8</PxeInterface>
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Workstation</VMWareEdition>
@@ -25,11 +25,16 @@
         <RepositoryUrl>https://github.com/9xbt/mango</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <CompressionType>Gzip</CompressionType>
+        <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+        <SignAssembly>False</SignAssembly>
+        <Title>The mango Operating System</Title>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="Resources\Background.bmp" />
-      <None Remove="Resources\Font.btf" />
+      <None Remove="Resources\DefaultFont.btf" />
       <None Remove="Resources\mango.bmp" />
       <None Remove="Resources\Mouse.bmp" />
       <None Remove="Resources\resize-se-nw.bmp" />
@@ -38,17 +43,21 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\Background.bmp" />
+      <EmbeddedResource Include="Resources\DefaultFont.btf" />
       <EmbeddedResource Include="Resources\mango.bmp" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Resources\Font.btf" />
       <EmbeddedResource Include="Resources\Mouse.bmp" />
       <EmbeddedResource Include="Resources\resize-se-nw.bmp" />
       <EmbeddedResource Include="Resources\resize-sw-ne.bmp" />
     </ItemGroup>
 
     <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
       <None Include="..\README.md">
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>

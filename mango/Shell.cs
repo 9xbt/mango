@@ -9,7 +9,7 @@
             input = input.Trim();
             string[] args = input.Split(' ');
 
-            switch (args[0].Trim().ToLower())
+            switch (args[0].Trim().ToLower().Replace("command", ""))
             {
                 case "":
                     break;
@@ -30,12 +30,28 @@
                     Commands.Clear();
                     break;
 
+                case "reboot":
+                    Commands.Reboot();
+                    break;
+
+                case "shutdown":
+                    Commands.Shutdown();
+                    break;
+
+                case "setfont":
+                    Commands.SetFont(input, args);
+                    break;
+
                 case "loadkeys":
                     Commands.LoadKeys(args);
                     break;
 
                 case "su":
                     Commands.SU(args);
+                    break;
+
+                case "who":
+                    Commands.Who();
                     break;
 
                 case "ls":

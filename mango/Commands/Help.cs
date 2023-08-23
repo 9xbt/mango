@@ -4,7 +4,7 @@
     {
         public static void Help()
         {
-            Console.WriteLine("help: All commands: ?, help, info, clear, loadkeys, su, ls, cd, touch, mkdir, cat, rm, rmdir", SVGAIIColor.Gray);
+            Console.WriteLine("help: All commands: command, ?, help, info, clear, reboot, shutdown, setfont, loadkeys, su, who, ls, cd, touch, mkdir, cat, rm, rmdir", SVGAIIColor.Gray);
         }
     }
 }
