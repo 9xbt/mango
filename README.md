@@ -1,13 +1,12 @@
 # The mango Operating System
-A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS.
+A powerful [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like commands & file paths.
+
+![image](https://github.com/9xbt/mango/assets/109512837/9603f42e-b7c3-42da-aa79-58d0fd1d7f83)
 
 ## Current features:
 - Unix-like commands, type `help` while in mango to list all of them.
 - FAT32 support.
-- (New!) Desktop enviorment with multiple terminal support.
-
-## Screenshots
-![image](https://github.com/9xbt/mango/assets/109512837/9603f42e-b7c3-42da-aa79-58d0fd1d7f83)
+- (New!) Desktop enviorment with multiple terminal support
 
 ## Resources used to make mango
 - [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
