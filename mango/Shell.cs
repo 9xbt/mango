@@ -4,6 +4,7 @@
     {
         public static void Run(string input, SVGAIITerminal Console)
         {
+            Console.Font = Resources.Font;
             Commands.Console = Console;
 
             input = input.Trim();

@@ -26,22 +26,14 @@ namespace mango
         [ManifestResourceStream(ResourceName = "mango.Resources.Background.bmp")] private static byte[] rawBackground;
         public static Canvas Background;
 
-        public static void GenerateFont()
-        {
-            Font = new Font(rawFont, 16);
-        }
+        public static void GenerateFont() => Font = new Font(rawFont, 16);
 
         public static void Initialize()
         {
-            Logger.InfoLog("Initializing embedded resource 1/5...");
             Logo = Image.FromBitmap(rawLogo, false);
-            Logger.InfoLog("Initializing embedded resource 2/5...");
             Mouse = Image.FromBitmap(rawMouse, false);
-            Logger.InfoLog("Initializing embedded resource 3/5...");
             ResizeSE_NW = Image.FromBitmap(rawResizeSE_NW, false);
-            Logger.InfoLog("Initializing embedded resource 4/5...");
             ResizeSW_NE = Image.FromBitmap(rawResizeSW_NE, false);
-            Logger.InfoLog("Initializing embedded resource 5/5...");
             Background = Image.FromBitmap(rawBackground, false);
 
             Logger.SuccessLog("Embedded resources initialized.");

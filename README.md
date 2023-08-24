@@ -1,15 +1,14 @@
 # The mango Operating System
-A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS that uses [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal) as the terminal.
+A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS.
 
 ## Current features:
-- Unix-like commands
-- Switching usernames
-- Switching keymaps
-- FAT32 support & disk commands
+- Unix-like commands, type `help` while in mango to list all of them.
+- FAT32 support.
+- <span style="color:darkorange">New!</span> Desktop enviorment with multiple terminal support.
 
 ## Screenshots
-![image](https://github.com/9xbt/mango/assets/109512837/e3570e73-d0a3-48c5-a793-5ebdf7ca1b92)
+*Insert screenshot here*
 
-### Note
-As a former GoOS developer, there's some similarities in mango from GoOS.
-[See the original window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs).
+## Resources used to make mango
+- [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
+- [GoOS window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs)

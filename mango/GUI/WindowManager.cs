@@ -58,6 +58,24 @@ namespace mango.GUI
             return counter;
         }
 
+        public static void Start()
+        {
+            var term = new Terminal();
+            term.Console.WriteLine($"Welcome back, {Kernel.Username}.\n");
+            term.Console.DrawImage(Resources.Logo, false);
+            term.Console.WriteLine($"\nThe mango Operating System\n{Kernel.Version}{Kernel.Copyright}");
+            term.DrawPrompt();
+
+            term.startX = term.Console.CursorX;
+            term.startY = term.Console.CursorY;
+            term.Action = TerminalAction.Shell;
+
+            AddWindow(new Desktop());
+            AddWindow(term);
+
+            Logger.SuccessLog("Desktop enviorment started.");
+        }
+
         public static void Update()
         {
             for (int i = 0; i < Windows.Count; i++)
