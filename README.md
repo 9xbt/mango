@@ -7,7 +7,7 @@ A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS.
 - <span style="color:darkorange">New!</span> Desktop enviorment with multiple terminal support.
 
 ## Screenshots
-*Insert screenshot here*
+![image](https://github.com/9xbt/mango/assets/109512837/9603f42e-b7c3-42da-aa79-58d0fd1d7f83)
 
 ## Resources used to make mango
 - [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
