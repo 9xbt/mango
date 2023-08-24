@@ -12,3 +12,4 @@ A powerful unix-like [Cosmos](https://github.com/CosmosOS/Cosmos) OS.
 ## Resources used to make mango
 - [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
 - [GoOS window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs)
+- [Desktop background image](https://www.pexels.com/photo/shallow-focus-photography-of-brown-grass-1209658/)
