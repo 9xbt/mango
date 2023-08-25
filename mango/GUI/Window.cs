@@ -17,7 +17,7 @@ namespace mango.GUI
 
         public int X, Y;
         public ushort Width, Height;
-        public string Name = "Unnamed window";
+        public string Name = "No name";
         public bool Movable = true;
 
         public bool Focused
@@ -61,12 +61,6 @@ namespace mango.GUI
 
         public virtual void Update()
         {
-            if (IsMouseOver && MouseManager.LastMouseState == MouseState.Left && MouseManager.MouseState == MouseState.None)
-            {
-                WindowManager.MoveWindowToFront(this);
-                MouseManager.LastMouseState = MouseState.None;
-            }
-
             if (Movable && IsMouseOver && Focused && MouseManager.LastMouseState == MouseState.None && MouseManager.MouseState == MouseState.Left)
             {
                 dragStartX = X;
@@ -80,11 +74,26 @@ namespace mango.GUI
             {
                 X = (int)(dragStartX + (MouseManager.X - dragStartMouseX));
                 Y = (int)(dragStartY + (MouseManager.Y - dragStartMouseY));
+                MouseDriver.Mouse = Resources.MouseDrag;
+                MouseDriver.MouseOffsetX = 7;
+                MouseDriver.MouseOffsetY = 7;
+            }
+
+            if (IsMouseOver && !Focused)
+            {
+                MouseDriver.Mouse = Resources.Link;
+                MouseDriver.MouseOffsetY = 1;
             }
 
             if (MouseManager.MouseState == MouseState.None)
             {
                 dragging = false;
+            }
+
+            if (IsMouseOver && MouseManager.LastMouseState == MouseState.Left && MouseManager.MouseState == MouseState.None && MouseDriver.Mouse == Resources.Link)
+            {
+                WindowManager.MoveWindowToFront(this);
+                MouseManager.LastMouseState = MouseState.None;
             }
         }
 

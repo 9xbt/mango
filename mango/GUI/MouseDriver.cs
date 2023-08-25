@@ -1,9 +1,13 @@
 ﻿using Cosmos.System;
+using PrismAPI.Graphics;
 
 namespace mango.GUI
 {
     public static class MouseDriver
     {
+        public static Canvas Mouse = Resources.Mouse;
+        public static int LastMouseX = (int)MouseManager.X, LastMouseY = (int)MouseManager.Y, MouseOffsetX = 0, MouseOffsetY = 0;
+
         public static void Initialize()
         {
             MouseManager.ScreenWidth = WindowManager.Screen.Width;
@@ -13,7 +17,7 @@ namespace mango.GUI
 
         public static void Update()
         {
-            WindowManager.Screen.DrawImage((int)MouseManager.X, (int)MouseManager.Y, Resources.Mouse, true);
+            WindowManager.Screen.DrawImage((int)MouseManager.X - MouseOffsetX, (int)MouseManager.Y - MouseOffsetY, Mouse, true);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace mango.GUI
     public static class WindowManager
     {
         private static short framesToHeapCollect = 10;
+        private static bool needToAddTerminal = false;
 
         public static Display Screen = Kernel.Screen;
         public static List<Window> Windows = new List<Window>(10);
@@ -19,22 +20,18 @@ namespace mango.GUI
         {
             get
             {
-                for (int i = Windows.Count - 1; i >= 0; i--)
-                    if (Windows[i] != null)
-                        return Windows[i];
+                if (Windows.Count < 1)
+                    return null;
 
-                return null;
+                return Windows[^1];
             }
         }
 
         public static Window LastFocusedWindow = null;
 
-        public static void AddWindow(Window wnd)
-        {
-            Windows.Add(wnd);
-        }
+        public static void AddWindow(Window wnd) => Windows.Add(wnd);
 
-        public static void RemoveWindow(Window wnd) => Windows.Remove(wnd);
+        public static void RemoveWindow(Window wnd) { try { if (Windows.Contains(wnd)) Windows.Remove(wnd); } catch { } }
 
         public static void MoveWindowToFront(Window wnd)
         {
@@ -92,14 +89,7 @@ namespace mango.GUI
             {
                 if (KeyboardManager.AltPressed && key.Key == ConsoleKeyEx.T)
                 {
-                    var term = new Terminal();
-                    term.DrawPrompt();
-
-                    term.startX = term.Console.CursorX;
-                    term.startY = term.Console.CursorY;
-                    term.Action = TerminalAction.Shell;
-
-                    AddWindow(term);
+                    needToAddTerminal = true;
                 }
                 else if (KeyboardManager.AltPressed && key.Key == ConsoleKeyEx.F4 && !FocusedWindow.Name.StartsWith("WM."))
                 {
@@ -111,6 +101,8 @@ namespace mango.GUI
                 }
             }
 
+            if (needToAddTerminal)
+                MouseDriver.Mouse = Resources.Busy;
             MouseDriver.Update();
 
             #if SHOW_FPS
@@ -118,6 +110,20 @@ namespace mango.GUI
             #endif
 
             Screen.Update();
+
+            if (needToAddTerminal)
+            {
+                var term = new Terminal();
+                term.DrawPrompt();
+
+                term.startX = term.Console.CursorX;
+                term.startY = term.Console.CursorY;
+                term.Action = TerminalAction.Shell;
+
+                AddWindow(term);
+
+                needToAddTerminal = false;
+            }
 
             framesToHeapCollect--;
 
@@ -129,6 +135,11 @@ namespace mango.GUI
             }
 
             LastFocusedWindow = FocusedWindow;
+            MouseDriver.Mouse = Resources.Mouse;
+            MouseDriver.MouseOffsetX = 0;
+            MouseDriver.MouseOffsetY = 0;
+            MouseDriver.LastMouseX = (int)MouseManager.X;
+            MouseDriver.LastMouseY = (int)MouseManager.Y;
         }
     }
 }

@@ -57,6 +57,9 @@ namespace mango.GUI.Apps
 
         public override void Update()
         {
+            if (IsMouseOver)
+                MouseDriver.Mouse = Resources.MouseText;
+
             base.Update();
 
             if (Focused)
@@ -74,9 +77,18 @@ namespace mango.GUI.Apps
                             Console.TryScroll();
                             Console.LastInput = returnValue;
 
-                            Shell.Run(returnValue, Console);
-                            Console.Font = Resources.Font;
-                            DrawPrompt();
+                            switch (Action)
+                            {
+                                case TerminalAction.Shell:
+                                    Shell.Run(returnValue, Console);
+                                    Console.Font = Resources.Font;
+                                    DrawPrompt();
+                                    break;
+
+                                case TerminalAction.ReadLine:
+                                    OnAction?.Invoke(Action);
+                                    break;
+                            }
 
                             startX = Console.CursorX;
                             startY = Console.CursorY;

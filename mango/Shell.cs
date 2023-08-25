@@ -10,7 +10,7 @@
             input = input.Trim();
             string[] args = input.Split(' ');
 
-            switch (args[0].Trim().ToLower().Replace("command", ""))
+            switch (args[0].Trim().ToLower())
             {
                 case "":
                     break;
@@ -84,7 +84,7 @@
                     break;
 
                 case "echo":
-                    Commands.Echo(input, input.Split("echo ")[1].Split(" >> "));
+                    Commands.Echo(input.Split("echo ")[1].Split(" >> "));
                     break;
 
                 default:

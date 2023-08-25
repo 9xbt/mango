@@ -17,11 +17,17 @@ namespace mango
         [ManifestResourceStream(ResourceName = "mango.Resources.Mouse.bmp")] private static byte[] rawMouse;
         public static Canvas Mouse;
 
-        [ManifestResourceStream(ResourceName = "mango.Resources.resize-se-nw.bmp")] private static byte[] rawResizeSE_NW;
-        public static Canvas ResizeSE_NW;
+        [ManifestResourceStream(ResourceName = "mango.Resources.MouseText.bmp")] private static byte[] rawMouseText;
+        public static Canvas MouseText;
 
-        [ManifestResourceStream(ResourceName = "mango.Resources.resize-sw-ne.bmp")] private static byte[] rawResizeSW_NE;
-        public static Canvas ResizeSW_NE;
+        [ManifestResourceStream(ResourceName = "mango.Resources.MouseDrag.bmp")] private static byte[] rawMouseDrag;
+        public static Canvas MouseDrag;
+
+        [ManifestResourceStream(ResourceName = "mango.Resources.Busy.bmp")] private static byte[] rawBusy;
+        public static Canvas Busy;
+
+        [ManifestResourceStream(ResourceName = "mango.Resources.Link.bmp")] private static byte[] rawLink;
+        public static Canvas Link;
 
         [ManifestResourceStream(ResourceName = "mango.Resources.Background.bmp")] private static byte[] rawBackground;
         public static Canvas Background;
@@ -32,8 +38,10 @@ namespace mango
         {
             Logo = Image.FromBitmap(rawLogo, false);
             Mouse = Image.FromBitmap(rawMouse, false);
-            ResizeSE_NW = Image.FromBitmap(rawResizeSE_NW, false);
-            ResizeSW_NE = Image.FromBitmap(rawResizeSW_NE, false);
+            MouseText = Image.FromBitmap(rawMouseText, false);
+            MouseDrag = Image.FromBitmap(rawMouseDrag, false);
+            Busy = Image.FromBitmap(rawBusy, false);
+            Link = Image.FromBitmap(rawLink, false);
             Background = Image.FromBitmap(rawBackground, false);
 
             Logger.SuccessLog("Embedded resources initialized.");

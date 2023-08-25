@@ -34,23 +34,28 @@
 
     <ItemGroup>
       <None Remove="Resources\Background.bmp" />
+      <None Remove="Resources\Busy.bmp" />
       <None Remove="Resources\DefaultFont.btf" />
+      <None Remove="Resources\fries.bmp" />
+      <None Remove="Resources\Link.bmp" />
       <None Remove="Resources\mango.bmp" />
       <None Remove="Resources\Mouse.bmp" />
-      <None Remove="Resources\resize-se-nw.bmp" />
-      <None Remove="Resources\resize-sw-ne.bmp" />
+      <None Remove="Resources\MouseDrag.bmp" />
+      <None Remove="Resources\MouseText.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\Background.bmp" />
+      <EmbeddedResource Include="Resources\Busy.bmp" />
       <EmbeddedResource Include="Resources\DefaultFont.btf" />
+      <EmbeddedResource Include="Resources\Link.bmp" />
       <EmbeddedResource Include="Resources\mango.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\Mouse.bmp" />
-      <EmbeddedResource Include="Resources\resize-se-nw.bmp" />
-      <EmbeddedResource Include="Resources\resize-sw-ne.bmp" />
+      <EmbeddedResource Include="Resources\MouseDrag.bmp" />
+      <EmbeddedResource Include="Resources\MouseText.bmp" />
     </ItemGroup>
 
     <ItemGroup>

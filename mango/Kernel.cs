@@ -20,6 +20,7 @@ namespace mango
         {
             try
             {
+                FallbackTerminalUpdate();
                 Resources.Initialize();
                 MouseDriver.Initialize();
                 DiskManager.InitFS(FS);

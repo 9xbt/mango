@@ -12,3 +12,4 @@ A powerful [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like co
 - [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
 - [GoOS window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs)
 - [Desktop background image](https://www.pexels.com/photo/shallow-focus-photography-of-brown-grass-1209658/)
+- [X11 Mouse cursors](https://en.wikipedia.org/wiki/X_Window_System)
