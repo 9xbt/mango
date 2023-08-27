@@ -1,4 +1,7 @@
-﻿namespace mango
+﻿using mango.GUI;
+using mango.GUI.Apps;
+
+namespace mango
 {
     public static class Shell
     {
@@ -45,6 +48,10 @@
 
                 case "loadkeys":
                     Commands.LoadKeys(args);
+                    break;
+
+                case "setbackground":
+                    Commands.SetBackground(input, args);
                     break;
 
                 case "su":

@@ -8,10 +8,10 @@ namespace mango.GUI.Apps
     {
         private byte lastMinute = RTC.Minute;
 
-        public Desktop() : base(0, 0, WindowManager.Screen.Width, WindowManager.Screen.Height, "WM.Desktop")
-        {
-            Movable = false;
-        }
+        public static Canvas BackgroundImage = Resources.Background;
+        public static bool BackgroundChangeRequest = true;
+
+        public Desktop() : base(0, 0, WindowManager.Screen.Width, WindowManager.Screen.Height, "WM.Desktop") { Movable = false; }
 
         public override void Render()
         {
@@ -22,7 +22,6 @@ namespace mango.GUI.Apps
                 Contents.DrawFilledRectangle(0, 0, Contents.Width, 20, 0, Color.LightBlack);
                 Contents.DrawString(2, 2, "1", Resources.Font, Color.White);
                 Contents.DrawString(Contents.Width - Resources.Font.MeasureString(timeString) - 2, 2, timeString, Resources.Font, BorderColor2);
-                Contents.DrawImage(0, 20, Resources.Background, false);
 
                 lastMinute = RTC.Minute;
 
@@ -34,6 +33,15 @@ namespace mango.GUI.Apps
 
         public override void Update()
         {
+            if (BackgroundChangeRequest)
+            {
+                for (int y = 20; y < Kernel.Screen.Height; y += Resources.Background.Height)
+                    for (int x = 0; x < Kernel.Screen.Width; x += Resources.Background.Width) // Tiling background image
+                        Contents.DrawImage(x, y, BackgroundImage, false);
+
+                BackgroundChangeRequest = false;
+            }
+
             if (RTC.Minute != lastMinute)
                 Render();
 

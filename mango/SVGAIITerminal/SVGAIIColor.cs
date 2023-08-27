@@ -1,4 +1,8 @@
-﻿using PrismAPI.Graphics;
+﻿/* This code is licensed under the ekzFreeUse license
+ * If a license wasn't included with the program,
+ * refer to https://github.com/9xbt/SVGAIITerminal/blob/main/LICENSE.md */
+
+using PrismAPI.Graphics;
 
 public static class SVGAIIColor
 {

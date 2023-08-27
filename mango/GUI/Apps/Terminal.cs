@@ -58,7 +58,12 @@ namespace mango.GUI.Apps
         public override void Update()
         {
             if (IsMouseOver)
+            {
                 MouseDriver.Mouse = Resources.MouseText;
+                MouseDriver.MouseOffsetX = 4;
+                MouseDriver.MouseOffsetY = 7;
+            }
+                
 
             base.Update();
 
