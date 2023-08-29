@@ -12,7 +12,7 @@ namespace mango
         public static Font Font = new Font(rawFont, 16);
 
         [ManifestResourceStream(ResourceName = "mango.Resources.mango.bmp")] private static byte[] rawLogo;
-        public static Canvas Logo;
+        public static Canvas Logo = Image.FromBitmap(rawLogo, false);
 
         [ManifestResourceStream(ResourceName = "mango.Resources.Mouse.bmp")] private static byte[] rawMouse;
         public static Canvas Mouse;
@@ -36,7 +36,7 @@ namespace mango
 
         public static void Initialize()
         {
-            Logo = Image.FromBitmap(rawLogo, false);
+            Kernel.DrawBootString("Initializing resources");
             Mouse = Image.FromBitmap(rawMouse, false);
             MouseText = Image.FromBitmap(rawMouseText, false);
             MouseDrag = Image.FromBitmap(rawMouseDrag, false);
@@ -44,7 +44,7 @@ namespace mango
             Link = Image.FromBitmap(rawLink, false);
             Background = Image.FromBitmap(rawBackground, false);
 
-            Logger.SuccessLog("Embedded resources initialized.");
+            //Logger.SuccessLog("Embedded resources initialized.");
         }
     }
 }

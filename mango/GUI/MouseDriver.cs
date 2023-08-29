@@ -10,9 +10,10 @@ namespace mango.GUI
 
         public static void Initialize()
         {
+            Kernel.DrawBootString("Initializing mouse driver");
             MouseManager.ScreenWidth = WindowManager.Screen.Width;
             MouseManager.ScreenHeight = WindowManager.Screen.Height;
-            Logger.SuccessLog("Mouse driver initialized.");
+            //Logger.SuccessLog("Mouse driver initialized.");
         }
 
         public static void Update()

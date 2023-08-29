@@ -28,7 +28,7 @@ public class SVGAIITerminal
 
     public SVGAIITerminal(int Width, int Height, Font Font, Action Update)
     {
-        this.Width = Width / (Font.Size / 2);
+        this.Width = Width / Font.MeasureString("A");
         this.Height = Height / Font.Size;
         this.Font = Font;
         this.Update = Update;

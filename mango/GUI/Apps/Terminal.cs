@@ -2,30 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using Cosmos.System;
+using PrismAPI.Graphics;
 
 namespace mango.GUI.Apps
 {
-    public enum TerminalAction
-    {
-        Shell,
-        ReadLine
-    }
-
     public class Terminal : Window
     {
         private Queue<KeyEvent> KeyBuffer = new Queue<KeyEvent>();
-
         public SVGAIITerminal Console;
-        public TerminalAction Action;
-        public Action<TerminalAction> OnAction;
 
         public Terminal() : base(50, 50, 720, 400, "Terminal")
         {
             Console = new SVGAIITerminal(716, 396, Resources.Font, TerminalUpdate);
-
-            startX = Console.CursorX;
-            startY = Console.CursorY;
-            returnValue = string.Empty;
         }
 
         public override void Render()
@@ -52,8 +40,8 @@ namespace mango.GUI.Apps
             Console.Write(" $ ");
         }
 
-        public int startX, startY;
-        public string returnValue;
+        public int startX = 0, startY = 0;
+        public string returnValue = string.Empty;
 
         public override void Update()
         {
@@ -82,18 +70,9 @@ namespace mango.GUI.Apps
                             Console.TryScroll();
                             Console.LastInput = returnValue;
 
-                            switch (Action)
-                            {
-                                case TerminalAction.Shell:
-                                    Shell.Run(returnValue, Console);
-                                    Console.Font = Resources.Font;
-                                    DrawPrompt();
-                                    break;
-
-                                case TerminalAction.ReadLine:
-                                    OnAction?.Invoke(Action);
-                                    break;
-                            }
+                            Shell.Run(returnValue, Console);
+                            Console.Font = Resources.Font;
+                            DrawPrompt();
 
                             startX = Console.CursorX;
                             startY = Console.CursorY;

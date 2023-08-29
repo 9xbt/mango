@@ -57,6 +57,7 @@ namespace mango.GUI
 
         public static void Start()
         {
+            Kernel.DrawBootString("Starting up");
             var term = new Terminal();
             term.Console.WriteLine($"Welcome back, {Kernel.Username}.\n");
             term.Console.DrawImage(Resources.Logo, false);
@@ -65,12 +66,11 @@ namespace mango.GUI
 
             term.startX = term.Console.CursorX;
             term.startY = term.Console.CursorY;
-            term.Action = TerminalAction.Shell;
 
             AddWindow(new Desktop());
             AddWindow(term);
 
-            Logger.SuccessLog("Desktop enviorment started.");
+            //Logger.SuccessLog("Desktop enviorment started.");
         }
 
         public static void Update()
@@ -118,7 +118,6 @@ namespace mango.GUI
 
                 term.startX = term.Console.CursorX;
                 term.startY = term.Console.CursorY;
-                term.Action = TerminalAction.Shell;
 
                 AddWindow(term);
 

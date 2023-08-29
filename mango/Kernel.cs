@@ -2,6 +2,7 @@
 using Sys = Cosmos.System;
 using Cosmos.System.FileSystem;
 using PrismAPI.Hardware.GPU;
+using PrismAPI.Graphics;
 using mango.GUI;
 
 namespace mango
@@ -21,6 +22,7 @@ namespace mango
             try
             {
                 FallbackTerminalUpdate();
+                BootAnimation();
                 Resources.Initialize();
                 MouseDriver.Initialize();
                 DiskManager.InitFS(FS);
@@ -45,9 +47,26 @@ namespace mango
             }
         }
 
+        private void BootAnimation()
+        {
+            for (int i = 50; i <= 228; i++)
+            {
+                Screen.Clear();
+                Screen.DrawImage((Screen.Width / 2) - (Resources.Logo.Width / 2), i, Resources.Logo, false);
+                Screen.Update();
+            }
+        }
+
         private static void FallbackTerminalUpdate()
         {
             Screen.DrawImage(0, 0, Console.Contents, false);
+            Screen.Update();
+        }
+
+        public static void DrawBootString(string text)
+        {
+            Screen.DrawFilledRectangle(0, 308, Screen.Width, 16, 0, Color.Black);
+            Screen.DrawString((Screen.Width / 2) - (Resources.Font.MeasureString(text) / 2), 308, text, Resources.Font, Color.White);
             Screen.Update();
         }
     }
