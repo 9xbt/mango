@@ -28,10 +28,6 @@ namespace mango
             }
             else if (args.Length == 2)
             {
-                if (args[1] == "/dev/null")
-                {
-                    Console.WriteLine($"echo: Successfully screamed {Encoding.ASCII.GetBytes(args[0]).Length} bytes into the void.", SVGAIIColor.Gray);
-                }
                 args[1] = args[1].Replace("/", "\\");
 
                 try

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cosmos.System;
 using PrismAPI.Graphics;
 
@@ -17,8 +18,10 @@ namespace mango.GUI
 
         public int X, Y;
         public ushort Width, Height;
-        public string Name = "No name";
+        public string Name;
         public bool Movable = true;
+
+        public List<Control> Controls;
 
         public bool Focused
         {
@@ -38,7 +41,7 @@ namespace mango.GUI
 
         public Canvas Contents;
 
-        public Window(int X, int Y, int Width, int Height, string Name)
+        public Window(int X, int Y, int Width, int Height, string Name = "No name")
         {
             this.X = X;
             this.Y = Y;
@@ -47,6 +50,7 @@ namespace mango.GUI
             this.Name = Name;
 
             Contents = new Canvas(this.Width, this.Height);
+            Controls = new List<Control>();
 
             Render();
         }
@@ -57,6 +61,14 @@ namespace mango.GUI
             Contents.DrawRectangle(0, 0, Convert.ToUInt16(Contents.Width - 1), Convert.ToUInt16(Contents.Height - 1), 0, BorderColor2);
             Contents[Contents.Width - 2, Contents.Height - 2] = BorderColor1;
             Contents[Contents.Width - 1, Contents.Height - 1] = BorderColor2;
+
+            foreach (Control control in Controls)
+            {
+                if (control != null)
+                {
+                    Contents.DrawImage(control.X, control.Y, control.Contents, false);
+                }
+            }
         }
 
         public virtual void Update()
@@ -94,6 +106,14 @@ namespace mango.GUI
             {
                 WindowManager.MoveWindowToFront(this);
                 MouseManager.LastMouseState = MouseState.None;
+            }
+
+            foreach (Control control in Controls)
+            {
+                if (control != null)
+                {
+                    control.Update();
+                }
             }
         }
 

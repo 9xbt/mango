@@ -29,6 +29,9 @@ namespace mango
         [ManifestResourceStream(ResourceName = "mango.Resources.Link.bmp")] private static byte[] rawLink;
         public static Canvas Link;
 
+        [ManifestResourceStream(ResourceName = "mango.Resources.Error.bmp")] private static byte[] rawError;
+        public static Canvas Error;
+
         [ManifestResourceStream(ResourceName = "mango.Resources.Background.bmp")] private static byte[] rawBackground;
         public static Canvas Background;
 
@@ -36,15 +39,15 @@ namespace mango
 
         public static void Initialize()
         {
-            Kernel.DrawBootString("Initializing resources");
             Mouse = Image.FromBitmap(rawMouse, false);
             MouseText = Image.FromBitmap(rawMouseText, false);
             MouseDrag = Image.FromBitmap(rawMouseDrag, false);
             Busy = Image.FromBitmap(rawBusy, false);
             Link = Image.FromBitmap(rawLink, false);
+            Error = Image.FromBitmap(rawError, false);
             Background = Image.FromBitmap(rawBackground, false);
 
-            //Logger.SuccessLog("Embedded resources initialized.");
+            Logger.SuccessLog("Embedded resources initialized.");
         }
     }
 }

@@ -36,6 +36,7 @@
       <None Remove="Resources\Background.bmp" />
       <None Remove="Resources\Busy.bmp" />
       <None Remove="Resources\DefaultFont.btf" />
+      <None Remove="Resources\Error.bmp" />
       <None Remove="Resources\fries.bmp" />
       <None Remove="Resources\Link.bmp" />
       <None Remove="Resources\mango.bmp" />
@@ -48,6 +49,7 @@
       <EmbeddedResource Include="Resources\Background.bmp" />
       <EmbeddedResource Include="Resources\Busy.bmp" />
       <EmbeddedResource Include="Resources\DefaultFont.btf" />
+      <EmbeddedResource Include="Resources\Error.bmp" />
       <EmbeddedResource Include="Resources\Link.bmp" />
       <EmbeddedResource Include="Resources\mango.bmp" />
     </ItemGroup>

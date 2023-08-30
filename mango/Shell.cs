@@ -1,5 +1,4 @@
-﻿using mango.GUI;
-using mango.GUI.Apps;
+﻿using mango.GUI.Apps;
 
 namespace mango
 {
@@ -92,6 +91,10 @@ namespace mango
 
                 case "echo":
                     Commands.Echo(input.Split("echo ")[1].Split(" >> "));
+                    break;
+
+                case "crash":
+                    GUI.WindowManager.AddWindow(new GUI.Apps.Dialogue($"The application TEST has been terminated\nTEST", DialogueIcon.Error));
                     break;
 
                 default:

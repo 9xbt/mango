@@ -17,6 +17,10 @@ namespace mango.GUI.Apps
         {
             try
             {
+                for (int y = 0; y < Kernel.Screen.Height; y += Resources.Background.Height)
+                    for (int x = 0; x < Kernel.Screen.Width; x += Resources.Background.Width) // Tiling background image
+                        Contents.DrawImage(x, y, BackgroundImage, false);
+
                 string timeString = DateTime.Now.ToString("t");
 
                 Contents.DrawFilledRectangle(0, 0, Contents.Width, 20, 0, Color.LightBlack);
@@ -29,23 +33,13 @@ namespace mango.GUI.Apps
                     Contents.DrawString(18, 2, WindowManager.FocusedWindow.Name, Resources.Font, BorderColor2);
             }
             catch { }
+
+            BackgroundChangeRequest = false;
         }
 
         public override void Update()
         {
-            if (BackgroundChangeRequest)
-            {
-                for (int y = 20; y < Kernel.Screen.Height; y += Resources.Background.Height)
-                    for (int x = 0; x < Kernel.Screen.Width; x += Resources.Background.Width) // Tiling background image
-                        Contents.DrawImage(x, y, BackgroundImage, false);
-
-                BackgroundChangeRequest = false;
-            }
-
-            if (RTC.Minute != lastMinute)
-                Render();
-
-            if (WindowManager.FocusedWindow != WindowManager.LastFocusedWindow)
+            if (BackgroundChangeRequest || RTC.Minute != lastMinute || WindowManager.FocusedWindow != WindowManager.LastFocusedWindow)
                 Render();
         }
     }

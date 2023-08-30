@@ -1,5 +1,6 @@
 ﻿//#define SHOW_FPS
 
+using System;
 using System.Collections.Generic;
 using Cosmos.Core.Memory;
 using Cosmos.System;
@@ -57,7 +58,6 @@ namespace mango.GUI
 
         public static void Start()
         {
-            Kernel.DrawBootString("Starting up");
             var term = new Terminal();
             term.Console.WriteLine($"Welcome back, {Kernel.Username}.\n");
             term.Console.DrawImage(Resources.Logo, false);
@@ -70,18 +70,40 @@ namespace mango.GUI
             AddWindow(new Desktop());
             AddWindow(term);
 
-            //Logger.SuccessLog("Desktop enviorment started.");
+            Logger.SuccessLog("Desktop enviorment started.");
         }
 
-        public static void Update()
+        public static void Update(Window except = null)
         {
-            for (int i = 0; i < Windows.Count; i++)
-            {
-                if (Windows[i] != null)
-                {
-                    Windows[i].Update();
+            Handle(except);
+            Render();
+        }
 
-                    Screen.DrawImage(Windows[i].X, Windows[i].Y, Windows[i].Contents, false);
+        public static void Handle(Window except = null)
+        {
+            foreach (Window wnd in Windows)
+            {
+                if (wnd != null)
+                {
+                    try
+                    {
+                        if (except != null)
+                        {
+                            if (except != wnd)
+                            {
+                                wnd.Update();
+                            }
+                        }
+                        else
+                        {
+                            wnd.Update();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AddWindow(new Dialogue($"The application {wnd?.Name} has been terminated\n{ex}", DialogueIcon.Error));
+                        Render();
+                    }
                 }
             }
 
@@ -97,19 +119,9 @@ namespace mango.GUI
                 }
                 else
                 {
-                    Windows[^1].HandleKey(key);
+                    FocusedWindow?.HandleKey(key);
                 }
             }
-
-            if (needToAddTerminal)
-                MouseDriver.Mouse = Resources.Busy;
-            MouseDriver.Update();
-
-            #if SHOW_FPS
-            Screen.DrawString(2, 22, $"{Screen.GetFPS()} FPS", Resources.Font, PrismAPI.Graphics.Color.Black);
-            #endif
-
-            Screen.Update();
 
             if (needToAddTerminal)
             {
@@ -123,9 +135,31 @@ namespace mango.GUI
 
                 needToAddTerminal = false;
             }
+        }
+
+        public static void Render()
+        {
+            foreach (Window wnd in Windows)
+            {
+                if (wnd != null)
+                {
+                    Screen.DrawImage(wnd.X, wnd.Y, wnd.Contents, false);
+                }
+            }
+
+            #if SHOW_FPS
+            Screen.DrawString(2, 22, $"{Screen.GetFPS()} FPS", Resources.Font, PrismAPI.Graphics.Color.Black);
+            #endif
+
+            if (needToAddTerminal)
+            {
+                MouseDriver.Mouse = Resources.Busy;
+            }
+            MouseDriver.Update();
+
+            Screen.Update();
 
             framesToHeapCollect--;
-
             if (framesToHeapCollect <= 0)
             {
                 Heap.Collect();

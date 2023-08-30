@@ -12,46 +12,31 @@ namespace mango
         {
             try
             {
-                Kernel.DrawBootString("Initializing filesystem");
                 VFSManager.RegisterVFS(fs);
                 Directory.GetFiles(@"0:\");
                 Directory.SetCurrentDirectory(@"0:\");
-                //Logger.SuccessLog("Filesystem intialized.");
+
+                Logger.SuccessLog("Filesystem intialized.");
             }
             catch
             {
-                Console.Clear();
                 Logger.ErrorLog("Failed to initialize filesystem!");
             }
         }
 
         public static void LoadSettings()
         {
-            Kernel.DrawBootString("Loading settings");
-
             try
             {
                 Kernel.Username = File.ReadAllText(@"0:\mango\username.txt");
-                //Logger.SuccessLog("Username loaded.");
-                //Logger.InfoLog($"Switched username to {Kernel.Username}.");
-            }
-            catch
-            {
-                Logger.WarnLog("Failed to load username! Entering first time setup...");
-                FirstTimeSetup();
-            }
+                Logger.SuccessLog("Username loaded.");
 
-            try
-            {
-                string keymapTo = File.ReadAllText(@"0:\mango\keymap.txt");
-                Commands.LoadKeys(new string[] { "loadkeys", keymapTo });
-                //Logger.SuccessLog("Keymap set.");
-                //Logger.InfoLog($"Set keymap to {keymapTo}.");
+                Commands.LoadKeys(new string[] { "loadkeys", File.ReadAllText(@"0:\mango\keymap.txt") });
+                Logger.SuccessLog("Keymap set.");
             }
             catch
             {
-                Console.Clear();
-                Logger.WarnLog("Failed to load keymap! Entering first time setup...");
+                Logger.WarnLog("Failed to load settings! Entering first time setup...");
                 FirstTimeSetup();
             }
         }
