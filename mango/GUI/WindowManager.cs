@@ -102,6 +102,7 @@ namespace mango.GUI
                     catch (Exception ex)
                     {
                         AddWindow(new Dialogue($"The application {wnd?.Name} has been terminated\n{ex}", DialogueIcon.Error));
+                        RemoveWindow(wnd);
                         Render();
                     }
                 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PrismAPI.Graphics;
+﻿using PrismAPI.Graphics;
 using mango.GUI.Controls;
 
 namespace mango.GUI.Apps
@@ -21,14 +16,18 @@ namespace mango.GUI.Apps
         public DialogueIcon Icon;
         public string Text;
 
-        public Dialogue(string Text, DialogueIcon Icon) : base((WindowManager.Screen.Width / 2) - (200 / 2), (WindowManager.Screen.Height / 2) - (150 / 2), 200, 150)
+        public Dialogue(string Text, DialogueIcon Icon) : base(
+            (WindowManager.Screen.Width / 2) - (((Icon != DialogueIcon.None ? 62 : 20) + MeasureLongestLine(Text)) / 2),
+            (WindowManager.Screen.Height / 2) - (((Icon != DialogueIcon.None ? 62 : 20) + MeasureStringHeight(Text)) / 2),
+            (Icon != DialogueIcon.None ? 62 : 20) + MeasureLongestLine(Text),
+            (Icon != DialogueIcon.None ? 62 : 20) + MeasureStringHeight(Text))
         {
             try
             {
-                this.Text = string.Join('\n', Split(Text, Icon != DialogueIcon.None ? 17 : 22));
+                this.Text = Text;
                 this.Icon = Icon;
 
-                OKButton = new Button(this, 150, 120, 40, 20, "OK", OKButton_Click);
+                OKButton = new Button(this, Width - 50, Height - 30, 40, 20, "OK", OKButton_Click);
 
                 Render();
             }
@@ -67,10 +66,26 @@ namespace mango.GUI.Apps
             catch { }
         }
 
-        private static IEnumerable<string> Split(string str, int chunkSize)
+        private static int MeasureStringHeight(string text)
         {
-            return Enumerable.Range(0, str.Length / chunkSize)
-                .Select(i => str.Substring(i * chunkSize, chunkSize));
+            return text.Split('\n').Length * Resources.Font.Size;
+        }
+
+        private static int MeasureLongestLine(string text)
+        {
+            int lastLength = 0;
+            string longestLine = string.Empty;
+            string[] lines = text.Split('\n');
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Length > lastLength)
+                    longestLine = lines[i];
+
+                lastLength = lines[i].Length;
+            }
+
+            return Resources.Font.MeasureString(longestLine);
         }
     }
 }
