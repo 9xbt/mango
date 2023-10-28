@@ -12,7 +12,7 @@ A powerful [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like co
 - (New!) Desktop enviorment with multiple terminal support
 
 ## Resources used to make mango
-- [SVGAIITerminal](https://github.com/9xbt/SVAIITerminal)
+- [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal)
 - [GoOS window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs)
 - [Desktop background image](https://www.pexels.com/photo/shallow-focus-photography-of-brown-grass-1209658/)
 - [X11 Mouse cursors](https://en.wikipedia.org/wiki/X_Window_System)
