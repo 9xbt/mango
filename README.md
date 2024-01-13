@@ -1,5 +1,4 @@
-![jOS](https://github.com/9xbt/mango/assets/109512837/4080c53a-7cea-4b93-bbe3-9dc12e94c841)
-
+# The mango Operating System
 A powerful C# [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like commands & file paths
 
 ![image](https://github.com/9xbt/mango/assets/109512837/9603f42e-b7c3-42da-aa79-58d0fd1d7f83)
