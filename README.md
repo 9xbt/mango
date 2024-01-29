@@ -8,7 +8,7 @@ A powerful C# [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like
 - FAT12/16/32 support
 - Minimalistic desktop environment
 
-## Resources used to make jOS
+## Resources used to make mango
 - [SVGAIITerminal](https://github.com/9xbt/SVGAIITerminal)
 - [GoOS window drag code](https://github.com/9xbt/GoOS/blob/Development/GoOS/GUI/Window.cs)
 - [Desktop background image](https://www.pexels.com/photo/shallow-focus-photography-of-brown-grass-1209658/)
