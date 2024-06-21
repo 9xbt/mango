@@ -1,4 +1,8 @@
 # The mango Operating System
+
+> [!IMPORTANT]
+> mango is not mantained anymore and is considered dead
+
 A powerful C# [Cosmos](https://github.com/CosmosOS/Cosmos) OS that has unix-like commands & file paths
 
 ![image](https://github.com/9xbt/mango/assets/109512837/9603f42e-b7c3-42da-aa79-58d0fd1d7f83)
